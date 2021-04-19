@@ -48,7 +48,8 @@ public class UserController {
         try {
             // 开始认证，这一步会跳到我们自定义的realm中
             subject.login(token);
-            request.getSession().setAttribute("user", user);
+
+            request.getSession().setAttribute("user", userService.getByUsername(user.getUsername()));
             return new JsonResult();
         } catch (Exception e) {
             e.printStackTrace();

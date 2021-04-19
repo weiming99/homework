@@ -2,10 +2,13 @@ package cn.hstc.service;
 
 import cn.hstc.mapper.IArticleMapper;
 import cn.hstc.pojo.Article;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author chen
@@ -22,4 +25,9 @@ public class ArticleService {
     }
 
 
+
+    public List<Article> page() {
+        IPage<Article> articleIPage = new Page<>(1,4);
+        return articleMapper.findList(articleIPage);
+    }
 }

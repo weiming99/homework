@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 /**
  * @author chen
  * @crete 2021-04-17-22:37
@@ -20,10 +22,10 @@ public class Article {
     private Integer id;
 
     @TableField()
-    private Integer authorId;
+    private Integer userId;
 
     @TableField()
-    private String authorName;
+    private String userName;
 
     @TableField()
     private String articleTitle;
@@ -38,11 +40,10 @@ public class Article {
     private String articleCategories;
 
     @TableField()
-    private String publishDate;
+    private Date publishDate;
 
     @TableField()
-    private String updateDate;
-
+    private Date updateDate;
 
     @TableField()
     private Integer likes;

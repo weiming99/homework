@@ -52,7 +52,7 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-left" th:if="${session.user !=null }">
                     <li><a data-cont="木庄网络博客" th:text="${ session.user.trueName}+你好" title="用户"></a></li>
-                    <li><a data-cont="木庄网络博客" th:href="@{/loginout.html}" title="注销">注销</a></li>
+                    <li><a data-cont="木庄网络博客" th:href="@{/logout}" title="注销">注销</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a data-cont="木庄网络博客" href="index.html" title="木庄网络博客">首页</a></li>
@@ -77,8 +77,8 @@
                 <h1><span class="red">【推荐】</span>报考攻略</h1>
                 <p class="note">
                 <h2>１定方向:&emsp;
-                    <a class="red" href="#" target="_blank">三步走优先定方向</a>&emsp;
-                    <a class="red" href="#" target="_blank">如何选择正确的方向</a></h2>
+                    <a class="red" href="/article/show/21" target="_blank">三步走优先定方向</a>&emsp;
+                    <a class="red" href="/article/show/22" target="_blank">如何选择正确的方向</a></h2>
                 </p>
                 <p class="note">
                 <h2>２选方向:&emsp;
@@ -103,25 +103,24 @@
                 </div>
             </div>
 
-            <article class="excerpt excerpt-1" style="">
+            <article class="excerpt excerpt-1" style="" th:each="index:${session.list}">
                 <a class="focus" href="#" target="_blank" title="用DTcms做一个独立博客网站（响应式模板）">
                     <img alt="用DTcms做一个独立博客网站（响应式模板）" class="thumb"
                          data-original="images/201610181739277776.jpg" style="display: inline;"
-                         th:src="@{/images/201610181739277776.jpg}"></a>
-                <header><a class="cat" href="#" title="MZ-NetBlog主题">MZ-NetBlog主题<i></i></a>
-                    <h2><a href="#" target="_blank" title="用DTcms做一个独立博客网站（响应式模板）">用DTcms做一个独立博客网站（响应式模板）</a>
+                         th:src="@{/images/2017116245.jpg}"></a>
+                <header><a class="cat" href="#"  >标题</a>
+                    <h2><a href="#" target="_blank"  th:text="${index.getArticleTitle()}"></a>
                     </h2>
                 </header>
                 <p class="meta">
-                    <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-10-14</time>
+                    <time class="time"><i class="glyphicon glyphicon-time"></i><span th:text="${index.getPublishDate()}"></span></time>
                     <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 216</span> <a class="comment"
                                                                                                    href="##comment"
                                                                                                    target="_blank"
                                                                                                    title="评论"><i
                         class="glyphicon glyphicon-comment"></i> 4</a>
                 </p>
-                <p class="note">用DTcms做一个独立博客网站（响应式模板），采用DTcms V4.0正式版（MSSQL）。开发环境：SQL2008R2+VS2010。DTcms
-                    V4.0正式版功能修复和优化：1、favicon.ico图标后台上传。（解决要换图标时要连FTP或者开服务器的麻烦）</p>
+                
             </article>
 
         </div>

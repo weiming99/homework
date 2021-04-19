@@ -44,10 +44,10 @@
 		</span></div>
                 </form>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a data-cont="木庄网络博客" href="index.html" title="木庄网络博客">首页</a></li>
-                    <li><a data-cont="列表页" href="list.html" title="列表页">列表页</a></li>
-                    <li><a data-cont="详细页" href="show.html" title="详细页">详细页</a></li>
-                    <li><a data-cont="404" href="404.html" title="404">404</a></li>
+                    <li><a data-cont="木庄网络博客" thref="/index.html" title="木庄网络博客">首页</a></li>
+                    <li><a data-cont="列表页" href="/list.html" title="列表页">列表页</a></li>
+                    <li><a data-cont="详细页" href="/show.html" title="详细页">详细页</a></li>
+                    <li><a data-cont="404" href="/404.html" title="404">404</a></li>
                     <li><a data-cont="MZ-NetBolg主题" href="#" title="MZ-NetBolg主题">MZ-NetBolg主题</a></li>
                     <li><a data-cont="IT技术笔记" href="#" title="IT技术笔记">IT技术笔记</a></li>
                     <li><a data-cont="源码分享" href="#" title="源码分享">源码分享</a></li>
@@ -62,63 +62,43 @@
     <div class="content-wrap">
         <div class="content">
             <header class="article-header">
-                <h1 class="article-title"><a href="#" title="用DTcms做一个独立博客网站（响应式模板）">用DTcms做一个独立博客网站（响应式模板）</a></h1>
+                <h1 class="article-title"><a href="#" th:title="${article.getArticleTitle()}"  th:text="${article.getArticleTitle()}">用DTcms做一个独立博客网站（响应式模板）</a></h1>
                 <div class="article-meta"> <span class="item article-meta-time">
-	  <time class="time" data-original-title="发表时间：2016-10-14" data-placement="bottom" data-toggle="tooltip" title=""><i
-              class="glyphicon glyphicon-time"></i> 2016-10-14</time>
+
+	  <time class="time"  data-placement="bottom" data-toggle="tooltip" ><i
+              class="glyphicon glyphicon-time"></i><span th:text="${article.getPublishDate().toString()}"></span></time>
 	  </span> <span class="item article-meta-source" data-original-title="来源：木庄网络博客" data-placement="bottom"
                     data-toggle="tooltip"
-                    title=""><i class="glyphicon glyphicon-globe"></i> 木庄网络博客</span> <span
-                        class="item article-meta-category" data-original-title="MZ-NetBlog主题" data-placement="bottom"
-                        data-toggle="tooltip"
-                        title=""><i class="glyphicon glyphicon-list"></i> <a href="#"
-                                                                             title="MZ-NetBlog主题">MZ-NetBlog主题</a></span>
-                    <span class="item article-meta-views" data-original-title="浏览量：219" data-placement="bottom"
+                    title=""><i class="glyphicon glyphicon-globe"></i><span th:text="${article.getArticleCategories()}"></span></span>
+
+                    <span class="item article-meta-views"  data-placement="bottom"
                           data-toggle="tooltip"
-                          title=""><i class="glyphicon glyphicon-eye-open"></i> 219</span> <span
+                          title=""><i class="glyphicon glyphicon-eye-open"></i><span th:text="${article.getLikes()}"></span></span> <span
                             class="item article-meta-comment" data-original-title="评论量" data-placement="bottom"
                             data-toggle="tooltip"
                             title=""><i class="glyphicon glyphicon-comment"></i> 4</span></div>
             </header>
-            <article class="article-content" th:object="${article}">
+
+            <article class="article-content" >
                 <p><img alt="" data-original="images/201610181557196870.jpg" src="images/201610181557196870.jpg"/></p>
-                <p th:text="${art}"></p>
-                <div th:text="${articleContent}"></div>
+                <p ></p>
+                <h2><div th:utext="${article.getArticleContent()}"></div></h2>
                 <pre class="prettyprint lang-cs">
 
 	</pre>
-                <div class="bdsharebuttonbox"><a class="bds_more" data-cmd="more" href="#"></a><a class="bds_qzone"
-                                                                                                  data-cmd="qzone"
-                                                                                                  href="#"
-                                                                                                  title="分享到QQ空间"></a><a
-                        class="bds_tsina" data-cmd="tsina" href="#" title="分享到新浪微博"></a><a class="bds_tqq"
-                                                                                           data-cmd="tqq"
-                                                                                           href="#"
-                                                                                           title="分享到腾讯微博"></a><a
-                        class="bds_weixin" data-cmd="weixin" href="#" title="分享到微信"></a><a class="bds_tieba"
-                                                                                           data-cmd="tieba"
-                                                                                           href="#"
-                                                                                           title="分享到百度贴吧"></a><a
-                        class="bds_sqq" data-cmd="sqq" href="#" title="分享到QQ好友"></a></div>
+
 
 
             </article>
-            <div class="article-tags">标签：<a href="#list/2/" rel="tag">DTcms博客</a><a href="#list/3/" rel="tag">木庄网络博客</a><a
-                    href="#list/4/" rel="tag">独立博客</a><a href="#list/5/" rel="tag">修复优化</a>
+            <div class="article-tags">标签：<a href="#list/2/" rel="tag" th:text="${article.getArticleTags()}"></a>
             </div>
             <div class="relates">
                 <div class="title">
                     <h3>相关推荐</h3>
                 </div>
                 <ul>
-                    <li><a href="#" title="">用DTcms做一个独立博客网站（响应式模板）-MZ-NetBlog主题</a></li>
-                    <li><a href="#" title="">用DTcms做一个独立博客网站（响应式模板）-MZ-NetBlog主题</a></li>
-                    <li><a href="#" title="">用DTcms做一个独立博客网站（响应式模板）-MZ-NetBlog主题</a></li>
-                    <li><a href="#" title="">用DTcms做一个独立博客网站（响应式模板）-MZ-NetBlog主题</a></li>
-                    <li><a href="#" title="">用DTcms做一个独立博客网站（响应式模板）-MZ-NetBlog主题</a></li>
-                    <li><a href="#" title="">用DTcms做一个独立博客网站（响应式模板）-MZ-NetBlog主题</a></li>
-                    <li><a href="#" title="">用DTcms做一个独立博客网站（响应式模板）-MZ-NetBlog主题</a></li>
-                    <li><a href="#" title="">用DTcms做一个独立博客网站（响应式模板）-MZ-NetBlog主题</a></li>
+                    <li th:each="index:${list}"><a   th:text="${index.getArticleTitle()}"></a></li>
+
                 </ul>
             </div>
             <div class="title" id="comment">
