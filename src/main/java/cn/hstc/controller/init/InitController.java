@@ -17,13 +17,13 @@ import java.util.List;
 public class InitController {
 
     @Resource
-     private ArticleService articleService;
+    private ArticleService articleService;
 
     @GetMapping({"", "/index", "index.html"})
     public String toIndex(HttpServletRequest request) {
-        List<Article> list=(List<Article>) request.getSession().getAttribute("list");
-        if (list==null||list.size()==0){
-            request.getSession().setAttribute("list",articleService.page());
+        List<Article> list = (List<Article>) request.getSession().getAttribute("list");
+        if (list == null || list.size() == 0) {
+            request.getSession().setAttribute("list", articleService.page());
         }
         return "/index";
     }

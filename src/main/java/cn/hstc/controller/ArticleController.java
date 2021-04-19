@@ -2,7 +2,6 @@ package cn.hstc.controller;
 
 import cn.hstc.pojo.Article;
 import cn.hstc.service.ArticleService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,8 +23,8 @@ public class ArticleController {
     @GetMapping("/article/show/{id}")
     public String get(@PathVariable Integer id, Model model) {
         Article article = articleService.get(id);
-        List<Article> list=articleService.page();
-        if (article==null){
+        List<Article> list = articleService.page();
+        if (article == null) {
             return "/404";
         }
         model.addAttribute("article", article);

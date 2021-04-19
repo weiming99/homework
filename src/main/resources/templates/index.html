@@ -108,19 +108,20 @@
                     <img alt="用DTcms做一个独立博客网站（响应式模板）" class="thumb"
                          data-original="images/201610181739277776.jpg" style="display: inline;"
                          th:src="@{/images/2017116245.jpg}"></a>
-                <header><a class="cat" href="#"  >标题</a>
-                    <h2><a href="#" target="_blank"  th:text="${index.getArticleTitle()}"></a>
+                <header><a class="cat" href="#">标题</a>
+                    <h2><a href="#" target="_blank" th:text="${index.getArticleTitle()}"></a>
                     </h2>
                 </header>
                 <p class="meta">
-                    <time class="time"><i class="glyphicon glyphicon-time"></i><span th:text="${index.getPublishDate()}"></span></time>
+                    <time class="time"><i class="glyphicon glyphicon-time"></i><span
+                            th:text="${index.getPublishDate()}"></span></time>
                     <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 216</span> <a class="comment"
                                                                                                    href="##comment"
                                                                                                    target="_blank"
                                                                                                    title="评论"><i
                         class="glyphicon glyphicon-comment"></i> 4</a>
                 </p>
-                
+
             </article>
 
         </div>

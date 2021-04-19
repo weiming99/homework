@@ -62,31 +62,35 @@
     <div class="content-wrap">
         <div class="content">
             <header class="article-header">
-                <h1 class="article-title"><a href="#" th:title="${article.getArticleTitle()}"  th:text="${article.getArticleTitle()}">用DTcms做一个独立博客网站（响应式模板）</a></h1>
+                <h1 class="article-title"><a href="#" th:text="${article.getArticleTitle()}"
+                                             th:title="${article.getArticleTitle()}">用DTcms做一个独立博客网站（响应式模板）</a></h1>
                 <div class="article-meta"> <span class="item article-meta-time">
 
-	  <time class="time"  data-placement="bottom" data-toggle="tooltip" ><i
+	  <time class="time" data-placement="bottom" data-toggle="tooltip"><i
               class="glyphicon glyphicon-time"></i><span th:text="${article.getPublishDate().toString()}"></span></time>
 	  </span> <span class="item article-meta-source" data-original-title="来源：木庄网络博客" data-placement="bottom"
                     data-toggle="tooltip"
-                    title=""><i class="glyphicon glyphicon-globe"></i><span th:text="${article.getArticleCategories()}"></span></span>
+                    title=""><i class="glyphicon glyphicon-globe"></i><span
+                        th:text="${article.getArticleCategories()}"></span></span>
 
-                    <span class="item article-meta-views"  data-placement="bottom"
+                    <span class="item article-meta-views" data-placement="bottom"
                           data-toggle="tooltip"
-                          title=""><i class="glyphicon glyphicon-eye-open"></i><span th:text="${article.getLikes()}"></span></span> <span
+                          title=""><i class="glyphicon glyphicon-eye-open"></i><span
+                            th:text="${article.getLikes()}"></span></span> <span
                             class="item article-meta-comment" data-original-title="评论量" data-placement="bottom"
                             data-toggle="tooltip"
                             title=""><i class="glyphicon glyphicon-comment"></i> 4</span></div>
             </header>
 
-            <article class="article-content" >
+            <article class="article-content">
                 <p><img alt="" data-original="images/201610181557196870.jpg" src="images/201610181557196870.jpg"/></p>
-                <p ></p>
-                <h2><div th:utext="${article.getArticleContent()}"></div></h2>
+                <p></p>
+                <h2>
+                    <div th:utext="${article.getArticleContent()}"></div>
+                </h2>
                 <pre class="prettyprint lang-cs">
 
 	</pre>
-
 
 
             </article>
@@ -97,7 +101,7 @@
                     <h3>相关推荐</h3>
                 </div>
                 <ul>
-                    <li th:each="index:${list}"><a   th:text="${index.getArticleTitle()}"></a></li>
+                    <li th:each="index:${list}"><a th:text="${index.getArticleTitle()}"></a></li>
 
                 </ul>
             </div>

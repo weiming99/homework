@@ -25,9 +25,8 @@ public class ArticleService {
     }
 
 
-
     public List<Article> page() {
-        IPage<Article> articleIPage = new Page<>(1,4);
+        IPage<Article> articleIPage = new Page<>(1, 4);
         return articleMapper.findList(articleIPage);
     }
 }
