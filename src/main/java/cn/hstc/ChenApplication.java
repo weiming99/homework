@@ -1,13 +1,13 @@
-package cn.hstc.homework;
+package cn.hstc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class HomeworkApplication {
+public class ChenApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(HomeworkApplication.class, args);
+        SpringApplication.run(ChenApplication.class, args);
     }
 
 }
