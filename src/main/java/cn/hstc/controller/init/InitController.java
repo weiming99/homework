@@ -3,6 +3,7 @@ package cn.hstc.controller.init;
 import cn.hstc.pojo.Article;
 import cn.hstc.service.ArticleService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.annotation.Resource;
@@ -25,16 +26,45 @@ public class InitController {
         if (list == null || list.size() == 0) {
             request.getSession().setAttribute("list", articleService.page());
         }
+        List<Article> listByNewComment = (List<Article>) request.getSession().getAttribute("articleListByNewComment");
+        if (listByNewComment == null || listByNewComment.size()==0){
+            List<Article> articleListByNewComment = articleService.pageByNewComment();
+            request.getSession().setAttribute("articleListByNewComment", articleListByNewComment);
+        }
+
         return "/index";
     }
 
     @GetMapping({"/show", "/show.html"})
-    public String toShow() {
+    public String toShow(Model model,HttpServletRequest request) {
+        Object list1 = model.getAttribute("list");
+        Object article = model.getAttribute("article");
+        if(list1==null || article ==null){
+            List<Article> list = articleService.page();
+            model.addAttribute("list", list);
+            return "/list";
+        }
+        List<Article> listByNewComment = (List<Article>) request.getSession().getAttribute("articleListByNewComment");
+        if (listByNewComment == null || listByNewComment.size()==0){
+            List<Article> articleListByNewComment = articleService.pageByNewComment();
+            request.getSession().setAttribute("articleListByNewComment", articleListByNewComment);
+        }
+
         return "/show";
     }
 
     @GetMapping({"/list", "/list.html"})
-    public String toList() {
+    public String toList(Model model,HttpServletRequest request) {
+        List<Article> list1 = (List<Article>) model.getAttribute("list");
+        if (list1 == null || list1.size() == 0) {
+            model.addAttribute("list", articleService.page());
+        }
+        List<Article> listByNewComment = (List<Article>) request.getSession().getAttribute("articleListByNewComment");
+        if (listByNewComment == null || listByNewComment.size()==0){
+            List<Article> articleListByNewComment = articleService.pageByNewComment();
+            request.getSession().setAttribute("articleListByNewComment", articleListByNewComment);
+        }
+
         return "/list";
     }
 
@@ -49,4 +79,8 @@ public class InitController {
         return "/index";
     }
 
+    @GetMapping({"/404", "/404.html"})
+    public String error() {
+        return "/404";
+    }
 }

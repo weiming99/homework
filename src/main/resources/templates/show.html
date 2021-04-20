@@ -43,16 +43,20 @@
 		<button class="btn btn-default btn-search" name="search" type="submit">搜索</button>
 		</span></div>
                 </form>
+                <ul class="nav navbar-nav navbar-left" th:if="${ session.user ==null }">
+                    <li><a data-cont="木庄网络博客" th:href="@{/login}" title="登录">登陆</a></li>
+                    <li><a data-cont="木庄网络博客" th:href="@{/regist}" title="注册">注册</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-left" th:if="${session.user !=null }">
+                    <li><a data-cont="木庄网络博客" th:text="${ session.user.getTrueName()}+',你好'" title="用户"></a></li>
+                    <li><a data-cont="木庄网络博客" th:href="@{/logout}" title="注销">注销</a></li>
+                </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a data-cont="木庄网络博客" thref="/index.html" title="木庄网络博客">首页</a></li>
-                    <li><a data-cont="列表页" href="/list.html" title="列表页">列表页</a></li>
-                    <li><a data-cont="详细页" href="/show.html" title="详细页">详细页</a></li>
-                    <li><a data-cont="404" href="/404.html" title="404">404</a></li>
-                    <li><a data-cont="MZ-NetBolg主题" href="#" title="MZ-NetBolg主题">MZ-NetBolg主题</a></li>
-                    <li><a data-cont="IT技术笔记" href="#" title="IT技术笔记">IT技术笔记</a></li>
-                    <li><a data-cont="源码分享" href="#" title="源码分享">源码分享</a></li>
-                    <li><a data-cont="靠谱网赚" href="#" title="靠谱网赚">靠谱网赚</a></li>
-                    <li><a data-cont="资讯分享" href="#" title="资讯分享">资讯分享</a></li>
+                    <li><a data-cont="木庄网络博客" th:href="@{/index.html}" title="木庄网络博客">首页</a></li>
+                    <li><a data-cont="列表页" th:href="@{/list.html}" title="列表页">列表页</a></li>
+                    <li><a data-cont="详细页" th:href="@{/show.html}" title="详细页">详细页</a></li>
+                    <li><a data-cont="404" th:href="@{/404.html}" title="404">404</a></li>
+
                 </ul>
             </div>
         </div>
@@ -101,7 +105,7 @@
                     <h3>相关推荐</h3>
                 </div>
                 <ul>
-                    <li th:each="index:${list}"><a th:text="${index.getArticleTitle()}"></a></li>
+                    <li th:each="index:${list}"><a th:href="@{'/article/show/'+${index.getId()}}"  th:text="${index.getArticleTitle()}"></a></li>
 
                 </ul>
             </div>
@@ -111,12 +115,12 @@
             <div id="respond">
                 <form action="" id="comment-form" method="POST" name="comment-form">
                     <div class="comment">
-                        <input autocomplete="off" class="form-control" id="1" maxlength="15" name=""
-                               placeholder="您的昵称（必填）"
-                               size="22" tabindex="1" type="text">
-                        <input autocomplete="off" class="form-control" id="2" maxlength="58" name=""
-                               placeholder="您的网址或邮箱（非必填）"
-                               size="22" tabindex="2" type="text">
+<!--                        <input autocomplete="off" class="form-control" id="1" maxlength="15" name=""-->
+<!--                               placeholder="您的昵称（必填）"-->
+<!--                               size="22" tabindex="1" type="text">-->
+<!--                        <input autocomplete="off" class="form-control" id="2" maxlength="58" name=""-->
+<!--                               placeholder="您的网址或邮箱（非必填）"-->
+<!--                               size="22" tabindex="2" type="text">-->
                         <div class="comment-box">
                             <textarea cols="100%" id="comment-textarea" name="comment-textarea"
                                       placeholder="您的评论或留言（必填）" rows="3" tabindex="3"></textarea>
@@ -133,16 +137,13 @@
                 </form>
 
             </div>
+
             <div id="postcomments">
                 <ol class="commentlist" id="comment_list">
-                    <li class="comment-content"><span class="comment-f">#2</span>
-                        <div class="comment-main"><p><a class="address" href="#" rel="nofollow"
-                                                        target="_blank">木庄网络博客</a><span class="time">(2016/10/28 11:41:03)</span><br>不错的网站主题，看着相当舒服
-                        </p></div>
-                    </li>
-                    <li class="comment-content"><span class="comment-f">#1</span>
-                        <div class="comment-main"><p><a class="address" href="#" rel="nofollow"
-                                                        target="_blank">木庄网络博客</a><span class="time">(2016/10/14 21:02:39)</span><br>博客做得好漂亮哦！
+                    <li class="comment-content" th:if="${commentRecordList!=null || commentRecordList.size()!=0}" th:each="index:${commentRecordList}"><span class="comment-f">-</span>
+                        <div class="comment-main"><p><a class="address"  rel="nofollow"
+                                                        target="_blank" th:text="${index.getAnswererName()}"></a><span class="time" th:text="${index.getCommentDate()}"></span>
+                            <br><span th:utext="${index.getCommentContent()}"></span>
                         </p></div>
                     </li>
                 </ol>
@@ -153,34 +154,30 @@
         <div class="fixed">
             <div class="widget widget-tabs">
                 <ul class="nav nav-tabs" role="tablist">
-                    <li class="active" role="presentation"><a aria-controls="notice" data-toggle="tab" draggable="false"
-                                                              href="#notice" role="tab">统计信息</a></li>
-                    <li role="presentation"><a aria-controls="contact" data-toggle="tab" draggable="false"
-                                               href="#contact"
-                                               role="tab">联系站长</a></li>
+                    <li class="active" role="presentation"><a aria-controls="notice" data-toggle="tab" href="#notice"
+                                                              role="tab">公告信息</a></li>
+                    <li role="presentation"><a aria-controls="contact" data-toggle="tab" href="#contact"
+                                               role="tab">联系作者</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane contact active" id="notice" role="tabpanel">
-                        <h2>日志总数:
-                            888篇
-                        </h2>
-                        <h2>网站运行:
+                        <h2>距离考研开始还有:
                             <span id="sitetime">88天 </span></h2>
                     </div>
                     <div class="tab-pane contact" id="contact" role="tabpanel">
-                        <h2>QQ:
-                            <a data-original-title="QQ:577211782" data-placement="bottom" data-toggle="tooltip"
-                               draggable="false" href=""
-                               rel="nofollow" target="_blank" title="">577211782</a>
+                        <h2>QQ:1329705883
+                            <a data-original-title="QQ:" data-placement="bottom" data-toggle="tooltip" href=""
+                               rel="nofollow"
+                               target="_blank" title=""></a>
                         </h2>
-                        <h2>Email:
-                            <a data-original-title="Email:577211782@qq.com" data-placement="bottom"
-                               data-toggle="tooltip" draggable="false"
-                               href="mailto:577211782@qq.com" rel="nofollow" target="_blank"
-                               title="">577211782@qq.com</a></h2>
+                        <h2>Email:weiming99@163.com
+                            <a data-original-title="#" data-placement="bottom" data-toggle="tooltip" href="#"
+                               rel="nofollow"
+                               target="_blank" title=""></a></h2>
                     </div>
                 </div>
             </div>
+
             <div class="widget widget_search">
                 <form action="/Search" class="navbar-form" method="post">
                     <div class="input-group">
@@ -193,83 +190,40 @@
                 </form>
             </div>
         </div>
-        <div class="widget widget_hot">
+        <div class="widget widget_hot" >
             <h3>最新评论文章</h3>
-            <ul>
-
-                <li><a href="#" title="用DTcms做一个独立博客网站（响应式模板）"><span class="thumbnail">
-<img alt="用DTcms做一个独立博客网站（响应式模板）" class="thumb" data-original="images/201610181739277776.jpg"
-     src="images/201610181739277776.jpg" style="display: block;">
-</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i class="glyphicon glyphicon-time"></i>
-2016-11-01
-</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-                <li><a href="#" title="用DTcms做一个独立博客网站（响应式模板）"><span class="thumbnail">
-<img alt="用DTcms做一个独立博客网站（响应式模板）" class="thumb" data-original="images/201610181739277776.jpg"
-     src="images/201610181739277776.jpg" style="display: block;">
-</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i class="glyphicon glyphicon-time"></i>
-2016-11-01
-</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-                <li><a href="#" title="用DTcms做一个独立博客网站（响应式模板）"><span class="thumbnail">
-<img alt="用DTcms做一个独立博客网站（响应式模板）" class="thumb" data-original="images/201610181739277776.jpg"
-     src="images/201610181739277776.jpg" style="display: block;">
-</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i class="glyphicon glyphicon-time"></i>
-2016-11-01
-</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-                <li><a href="#" title="用DTcms做一个独立博客网站（响应式模板）"><span class="thumbnail">
-<img alt="用DTcms做一个独立博客网站（响应式模板）" class="thumb" data-original="images/201610181739277776.jpg"
-     src="images/201610181739277776.jpg" style="display: block;">
-</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i class="glyphicon glyphicon-time"></i>
-2016-11-01
-</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-                <li><a href="#" title="用DTcms做一个独立博客网站（响应式模板）"><span class="thumbnail">
-<img alt="用DTcms做一个独立博客网站（响应式模板）" class="thumb" data-original="images/201610181739277776.jpg"
-     src="images/201610181739277776.jpg" style="display: block;">
-</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i class="glyphicon glyphicon-time"></i>
-2016-11-01
-</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-                <li><a href="#" title="用DTcms做一个独立博客网站（响应式模板）"><span class="thumbnail">
-<img alt="用DTcms做一个独立博客网站（响应式模板）" class="thumb" data-original="images/201610181739277776.jpg"
-     src="images/201610181739277776.jpg" style="display: block;">
-</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i class="glyphicon glyphicon-time"></i>
-2016-11-01
-</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-                <li><a href="#" title="用DTcms做一个独立博客网站（响应式模板）"><span class="thumbnail">
-<img alt="用DTcms做一个独立博客网站（响应式模板）" class="thumb" data-original="images/201610181739277776.jpg"
-     src="images/201610181739277776.jpg" style="display: block;">
-</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i class="glyphicon glyphicon-time"></i>
-2016-11-01
-</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-                <li><a href="#" title="用DTcms做一个独立博客网站（响应式模板）"><span class="thumbnail">
-<img alt="用DTcms做一个独立博客网站（响应式模板）" class="thumb" data-original="images/201610181739277776.jpg"
-     src="images/201610181739277776.jpg" style="display: block;">
-</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i class="glyphicon glyphicon-time"></i>
-2016-11-01
-</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-
+            <ul th:each="index:${session.articleListByNewComment}">
+                <li><a th:href="@{'/article/show/'+${index.getId()}}" ><span class="thumbnail">
+<img alt="" class="thumb" data-original="/images/2017116245.jpg"
+     src="/images/2017116245.jpg" style="display: block;">
+</span><span class="text" th:text="${index.getArticleTitle()}"></span><span class="muted"><i class="glyphicon glyphicon-time"></i>
+<span th:text="${index.getPublishDate()}"></span>
+</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i><span th:text="${index.getLikes()}"></span></span></a></li>
             </ul>
         </div>
+
         <div class="widget widget_sentence">
 
             <a href="#" rel="nofollow" target="_blank" title="MZ-NetBlog主题">
-                <img alt="MZ-NetBlog主题" src="images/ad.jpg" style="width: 100%"></a>
+                <img alt="MZ-NetBlog主题" src="/images/ad.jpg" style="width: 100%"></a>
 
         </div>
         <div class="widget widget_sentence">
 
             <a href="#" rel="nofollow" target="_blank" title="专业网站建设">
-                <img alt="专业网站建设" src="images/201610241224221511.jpg" style="width: 100%"></a>
+                <img alt="专业网站建设" src="/images/201610241224221511.jpg" style="width: 100%"></a>
 
         </div>
     </aside>
 </section>
 <footer class="footer">
     <div class="container">
-        <p>Copyright &copy; 2016.Company name All rights reserved.</p>
+        <p>Copyright &copy; 2021.Company name All rights reserved.</p>
     </div>
     <div id="gotop"><a class="gotop"></a></div>
 </footer>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.ias.js"></script>
-<script src="js/scripts.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.ias.js"></script>
+<script src="/js/scripts.js"></script>
 </body>
 </html>

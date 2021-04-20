@@ -46,24 +46,20 @@
                     </div>
                 </form>
 
-                <ul class="nav navbar-nav navbar-left" th:if="${    session.user ==null }">
+                <ul class="nav navbar-nav navbar-left" th:if="${ session.user ==null }">
                     <li><a data-cont="木庄网络博客" th:href="@{/login}" title="登录">登陆</a></li>
                     <li><a data-cont="木庄网络博客" th:href="@{/regist}" title="注册">注册</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-left" th:if="${session.user !=null }">
-                    <li><a data-cont="木庄网络博客" th:text="${ session.user.trueName}+你好" title="用户"></a></li>
+                    <li><a data-cont="木庄网络博客" th:text="${ session.user.getTrueName()}+',你好'" title="用户"></a></li>
                     <li><a data-cont="木庄网络博客" th:href="@{/logout}" title="注销">注销</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a data-cont="木庄网络博客" href="index.html" title="木庄网络博客">首页</a></li>
-                    <li><a data-cont="列表页" href="list.html" title="列表页">列表页</a></li>
-                    <li><a data-cont="详细页" href="show.html" title="详细页">详细页</a></li>
-                    <li><a data-cont="404" href="404.html" title="404">404</a></li>
-                    <li><a data-cont="MZ-NetBolg主题" href="#" title="MZ-NetBolg主题">MZ-NetBolg主题</a></li>
-                    <li><a data-cont="IT技术笔记" href="#" title="IT技术笔记">IT技术笔记</a></li>
-                    <li><a data-cont="源码分享" href="#" title="源码分享">源码分享</a></li>
-                    <li><a data-cont="靠谱网赚" href="#" title="靠谱网赚">靠谱网赚</a></li>
-                    <li><a data-cont="资讯分享" href="#" title="资讯分享">资讯分享</a></li>
+                    <li><a data-cont="木庄网络博客" th:href="@{/index.html}" title="木庄网络博客">首页</a></li>
+                    <li><a data-cont="列表页" th:href="@{/list.html}" title="列表页">列表页</a></li>
+                    <li><a data-cont="详细页" th:href="@{/show.html}" title="详细页">详细页</a></li>
+                    <li><a data-cont="404" th:href="@{/404.html}" title="404">404</a></li>
+
                 </ul>
             </div>
         </div>
@@ -94,31 +90,24 @@
 
             <div class="title">
                 <h3>最新发布</h3>
-                <div class="more">
-                    <a href="#" title="MZ-NetBlog主题">MZ-NetBlog主题</a>
-                    <a href="#" title="IT技术笔记">IT技术笔记</a>
-                    <a href="#" title="源码分享">源码分享</a>
-                    <a href="#" title="靠谱网赚">靠谱网赚</a>
-                    <a href="#" title="资讯分享">资讯分享</a>
-                </div>
             </div>
 
             <article class="excerpt excerpt-1" style="" th:each="index:${session.list}">
-                <a class="focus" href="#" target="_blank" title="用DTcms做一个独立博客网站（响应式模板）">
+                <a class="focus" th:href="@{'/article/show/'+${index.getId()}}" target="_blank" >
                     <img alt="用DTcms做一个独立博客网站（响应式模板）" class="thumb"
-                         data-original="images/201610181739277776.jpg" style="display: inline;"
+                         data-original="/images/2017116245.jpg" style="display: inline;"
                          th:src="@{/images/2017116245.jpg}"></a>
-                <header><a class="cat" href="#">标题</a>
-                    <h2><a href="#" target="_blank" th:text="${index.getArticleTitle()}"></a>
+                <header><a class="cat" th:href="@{'/article/show/'+${index.getId()}}">标题</a>
+                    <h2><a th:href="@{'/article/show/'+${index.getId()}}" target="_blank" th:text="${index.getArticleTitle()}"></a>
                     </h2>
                 </header>
                 <p class="meta">
                     <time class="time"><i class="glyphicon glyphicon-time"></i><span
                             th:text="${index.getPublishDate()}"></span></time>
-                    <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 216</span> <a class="comment"
-                                                                                                   href="##comment"
-                                                                                                   target="_blank"
-                                                                                                   title="评论"><i
+                    <span class="views"><i class="glyphicon glyphicon-eye-open"></i><span th:text="${index.getLikes()}"></span></span> <a class="comment"
+                                                                                                                                          href="##comment"
+                                                                                                                                          target="_blank"
+                                                                                                                                          title="评论"><i
                         class="glyphicon glyphicon-comment"></i> 4</a>
                 </p>
 
@@ -147,7 +136,7 @@
                                rel="nofollow"
                                target="_blank" title=""></a>
                         </h2>
-                        <h2>Email:weiming99.com
+                        <h2>Email:weiming99@163.com
                             <a data-original-title="#" data-placement="bottom" data-toggle="tooltip" href="#"
                                rel="nofollow"
                                target="_blank" title=""></a></h2>
@@ -171,23 +160,19 @@
 
         <div class="widget widget_hot">
             <h3>最新评论文章</h3>
-            <ul>
-                <li><a href="#" title="用DTcms做一个独立博客网站（响应式模板）"><span class="thumbnail">
-				<img alt="用DTcms做一个独立博客网站（响应式模板）" class="thumb"
-                     data-original="images/201610181739277776.jpg" style="display: block;"
-                     th:src="@{/images/201610181739277776.jpg}">
-			</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i
-                        class="glyphicon glyphicon-time"></i>
-				2016-11-01
-			</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-
-
+            <ul th:each="index:${session.articleListByNewComment}">
+                <li><a th:href="@{'/article/show/'+${index.getId()}}" ><span class="thumbnail">
+<img alt="" class="thumb" data-original="/images/2017116245.jpg"
+     src="/images/2017116245.jpg" style="display: block;">
+</span><span class="text" th:text="${index.getArticleTitle()}"></span><span class="muted"><i class="glyphicon glyphicon-time"></i>
+<span th:text="${index.getPublishDate()}"></span>
+</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i><span th:text="${index.getLikes()}"></span></span></a></li>
             </ul>
         </div>
 
         <div class="widget widget_sentence">
             <a href="#" rel="nofollow" target="_blank" title="专业网站建设">
-                <img alt="专业网站建设" style="width: 100%" th:src="@{/images//201610241224221511.jpg}"></a>
+                <img alt="专业网站建设" style="width: 100%" th:src="@{/images/201610241224221511.jpg}"></a>
         </div>
         <div class="widget widget_sentence">
             <a href="#" rel="nofollow" target="_blank" title="MZ-NetBlog主题">
@@ -204,7 +189,7 @@
 
 <footer class="footer">
     <div class="container">
-        <p>Copyright &copy; 2016.Company name All rights reserved.</p>
+        <p>Copyright &copy; 2021.Company name All rights reserved.</p>
     </div>
     <div id="gotop"><a class="gotop"></a></div>
 </footer>

@@ -26,7 +26,22 @@ public class ArticleService {
 
 
     public List<Article> page() {
-        IPage<Article> articleIPage = new Page<>(1, 4);
+        IPage<Article> articleIPage = new Page<>(1, 5);
         return articleMapper.findList(articleIPage);
+    }
+
+    public List<Article> pageByNewComment() {
+        IPage<Article> articleIPage = new Page<>(1, 5);
+        return articleMapper.findListByComment(articleIPage);
+    }
+
+    public List<Article> pageByTag(String tag) {
+        IPage<Article> articleIPage = new Page<>(1, 5);
+        return articleMapper.findListByTag(tag,articleIPage);
+    }
+
+    public List<Article> pageByCategory(String category) {
+        IPage<Article> articleIPage = new Page<>(1, 5);
+        return articleMapper.findListByCategory(category,articleIPage);
     }
 }
