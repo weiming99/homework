@@ -5,7 +5,7 @@
     <meta content="webkit" name="renderer">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1" name="viewport">
-    <title>列表</title>
+    <title>学校展示</title>
     <meta content="" name="keywords">
     <meta content="" name="description">
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css">
@@ -15,21 +15,20 @@
     <link rel="apple-touch-icon-precomposed" th:href="@{/images/icon.png}">
     <link rel="shortcut icon" th:href="@{/images/favicon.ico}">
 
-
     <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
-    <script src="/js/nprogress.js"></script>
-    <script src="/js/jquery.lazyload.min.js"></script>
+    <script src="js/nprogress.js"></script>
+    <script src="js/jquery.lazyload.min.js"></script>
     <!--[if gte IE 9]>
-    <script src="/js/jquery-1.11.1.min.js" type="text/javascript"></script>
-    <script src="/js/html5shiv.min.js" type="text/javascript"></script>
-    <script src="/js/respond.min.js" type="text/javascript"></script>
-    <script src="/js/selectivizr-min.js" type="text/javascript"></script>
+    <script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
+    <script src="js/html5shiv.min.js" type="text/javascript"></script>
+    <script src="js/respond.min.js" type="text/javascript"></script>
+    <script src="js/selectivizr-min.js" type="text/javascript"></script>
     <![endif]-->
     <!--[if lt IE 9]>
     <script>window.location.href = 'upgrade-browser.html';</script>
     <![endif]-->
 </head>
-<body class="user-select">
+<body class="user-select single">
 <header class="header">
     <nav class="navbar navbar-default" id="navbar">
         <div class="container">
@@ -65,34 +64,55 @@
 </header>
 <section class="container">
     <div class="content-wrap">
-        <div class="content">
-            <div class="title">
-                <h3 style="line-height: 1.3">考研系统查询 真的靠谱</h3>
-            </div>
-            <article class="excerpt excerpt-1" style="" th:each="index:${list}">
-                <a class="focus" th:href="@{'/article/show/'+${index.getId()}}" target="_blank" >
-                    <img alt="用DTcms做一个独立博客网站（响应式模板）" class="thumb"
-                         data-original="/images/2017116245.jpg" style="display: inline;"
-                         th:src="@{/images/2017116245.jpg}"></a>
-                <header><a class="cat" th:href="@{'/article/show/'+${index.getId()}}">标题</a>
-                    <h2><a th:href="@{'/article/show/'+${index.getId()}}" target="_blank" th:text="${index.getArticleTitle()}"></a>
-                    </h2>
-                </header>
-                <p class="meta">
-                    <time class="time"><i class="glyphicon glyphicon-time"></i><span
-                            th:text="${index.getPublishDate()}"></span></time>
-                    <span class="views"><i class="glyphicon glyphicon-eye-open"></i><span th:text="${index.getLikes()}"></span></span> <a class="comment"
-                                                                                                                                          href="##comment"
-                                                                                                                                          target="_blank"
-                                                                                                                                          title="评论"><i
-                        class="glyphicon glyphicon-comment"></i> 4</a>
-                </p>
+        <div class="content" >
+            <header class="article-header">
+                <h1 class="article-title"><a href="#" th:text="专业分数排名"
+                                             ></a></h1>
+            </header>
+
+            <article class="article-content">
+                <h2 >
+                    <p th:each="major,index:${majors}">
+                        <span th:text="${index.index}"></span>
+                        &emsp;学校名称: <a th:href="@{'/school/show/'+${major.getSchoolId()}}" th:text="${major.getSchoolName()}"></a>
+                        &emsp;学校分数:<span th:text="${major.getMajorScore()}"></span>
+                    </p>
+                </h2>
+
+
 
             </article>
+
         </div>
     </div>
     <aside class="sidebar">
         <div class="fixed">
+            <div class="widget widget-tabs">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="active" role="presentation"><a aria-controls="notice" data-toggle="tab" href="#notice"
+                                                              role="tab">公告信息</a></li>
+                    <li role="presentation"><a aria-controls="contact" data-toggle="tab" href="#contact"
+                                               role="tab">联系作者</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane contact active" id="notice" role="tabpanel">
+                        <h2>距离考研开始还有:
+                            <span id="sitetime">88天 </span></h2>
+                    </div>
+                    <div class="tab-pane contact" id="contact" role="tabpanel">
+                        <h2>QQ:1329705883
+                            <a data-original-title="QQ:" data-placement="bottom" data-toggle="tooltip" href=""
+                               rel="nofollow"
+                               target="_blank" title=""></a>
+                        </h2>
+                        <h2>Email:weiming99@163.com
+                            <a data-original-title="#" data-placement="bottom" data-toggle="tooltip" href="#"
+                               rel="nofollow"
+                               target="_blank" title=""></a></h2>
+                    </div>
+                </div>
+            </div>
+
             <div class="widget widget_search">
                 <form action="/Search" class="navbar-form" method="post">
                     <div class="input-group">
@@ -104,22 +124,8 @@
 		</span></div>
                 </form>
             </div>
-            <div class="widget widget_sentence">
-                <h3>标签云</h3>
-                <div class="widget-sentence-content">
-                    <ul class="plinks ptags"  >
-                        <li th:each="tag:${tags}">
-                            <a draggable="false" th:href="@{'/article/List/tag/'+${tag}}" th:text="${tag}"></a></li>
-                        <li th:each="category:${categorys}">
-                            <a draggable="false" th:href="@{'/article/List/category/'+${category}}" th:text="${category}"></a></li>
-                    </ul>
-                </div>
-
-
-
-            </div>
         </div>
-        <div class="widget widget_hot">
+        <div class="widget widget_hot" >
             <h3>最新评论文章</h3>
             <ul th:each="index:${session.articleListByNewComment}">
                 <li><a th:href="@{'/article/show/'+${index.getId()}}" ><span class="thumbnail">
@@ -130,6 +136,7 @@
 </span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i><span th:text="${index.getLikes()}"></span></span></a></li>
             </ul>
         </div>
+
         <div class="widget widget_sentence">
 
             <a href="#" rel="nofollow" target="_blank" title="MZ-NetBlog主题">

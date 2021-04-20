@@ -5,7 +5,7 @@
     <meta content="webkit" name="renderer">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1" name="viewport">
-    <title>列表</title>
+    <title>专业列表</title>
     <meta content="" name="keywords">
     <meta content="" name="description">
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css">
@@ -67,58 +67,22 @@
     <div class="content-wrap">
         <div class="content">
             <div class="title">
-                <h3 style="line-height: 1.3">考研系统查询 真的靠谱</h3>
+                <h3 style="line-height: 1.3">专业列表</h3>
             </div>
             <article class="excerpt excerpt-1" style="" th:each="index:${list}">
-                <a class="focus" th:href="@{'/article/show/'+${index.getId()}}" target="_blank" >
+                <a class="focus" th:href="@{'/major/show/'+${index.getMajorId()}}" target="_blank" >
                     <img alt="用DTcms做一个独立博客网站（响应式模板）" class="thumb"
                          data-original="/images/2017116245.jpg" style="display: inline;"
                          th:src="@{/images/2017116245.jpg}"></a>
-                <header><a class="cat" th:href="@{'/article/show/'+${index.getId()}}">标题</a>
-                    <h2><a th:href="@{'/article/show/'+${index.getId()}}" target="_blank" th:text="${index.getArticleTitle()}"></a>
+                <header><a class="cat" th:href="@{'/major/show/'+${index.getMajorName()}}">标题</a>
+                    <h2><a th:href="@{'/major/show/'+${index.getMajorId()}}" target="_blank" th:text="${index.getMajorName()}"></a>
                     </h2>
                 </header>
-                <p class="meta">
-                    <time class="time"><i class="glyphicon glyphicon-time"></i><span
-                            th:text="${index.getPublishDate()}"></span></time>
-                    <span class="views"><i class="glyphicon glyphicon-eye-open"></i><span th:text="${index.getLikes()}"></span></span> <a class="comment"
-                                                                                                                                          href="##comment"
-                                                                                                                                          target="_blank"
-                                                                                                                                          title="评论"><i
-                        class="glyphicon glyphicon-comment"></i> 4</a>
-                </p>
 
             </article>
         </div>
     </div>
     <aside class="sidebar">
-        <div class="fixed">
-            <div class="widget widget_search">
-                <form action="/Search" class="navbar-form" method="post">
-                    <div class="input-group">
-                        <input autocomplete="off" class="form-control" maxlength="15" name="keyword"
-                               placeholder="请输入关键字"
-                               size="35" type="text">
-                        <span class="input-group-btn">
-		<button class="btn btn-default btn-search" name="search" type="submit">搜索</button>
-		</span></div>
-                </form>
-            </div>
-            <div class="widget widget_sentence">
-                <h3>标签云</h3>
-                <div class="widget-sentence-content">
-                    <ul class="plinks ptags"  >
-                        <li th:each="tag:${tags}">
-                            <a draggable="false" th:href="@{'/article/List/tag/'+${tag}}" th:text="${tag}"></a></li>
-                        <li th:each="category:${categorys}">
-                            <a draggable="false" th:href="@{'/article/List/category/'+${category}}" th:text="${category}"></a></li>
-                    </ul>
-                </div>
-
-
-
-            </div>
-        </div>
         <div class="widget widget_hot">
             <h3>最新评论文章</h3>
             <ul th:each="index:${session.articleListByNewComment}">
