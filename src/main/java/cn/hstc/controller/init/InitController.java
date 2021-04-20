@@ -42,6 +42,11 @@ public class InitController {
         if(list1==null || article ==null){
             List<Article> list = articleService.page();
             model.addAttribute("list", list);
+            List<String> tags = articleService.getTags();
+            List<String> categorys = articleService.getCategorys();
+
+            model.addAttribute("tags",tags);
+            model.addAttribute("categorys",categorys);
             return "/list";
         }
         List<Article> listByNewComment = (List<Article>) request.getSession().getAttribute("articleListByNewComment");
@@ -64,6 +69,11 @@ public class InitController {
             List<Article> articleListByNewComment = articleService.pageByNewComment();
             request.getSession().setAttribute("articleListByNewComment", articleListByNewComment);
         }
+        List<String> tags = articleService.getTags();
+        List<String> categorys = articleService.getCategorys();
+
+        model.addAttribute("tags",tags);
+        model.addAttribute("categorys",categorys);
 
         return "/list";
     }

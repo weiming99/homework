@@ -44,4 +44,12 @@ public class ArticleService {
         IPage<Article> articleIPage = new Page<>(1, 5);
         return articleMapper.findListByCategory(category,articleIPage);
     }
+
+    public List<String> getTags() {
+        return articleMapper.findTags();
+    }
+
+    public List<String> getCategorys() {
+        return articleMapper.findCategorys();
+    }
 }

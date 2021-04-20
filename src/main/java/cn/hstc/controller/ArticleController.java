@@ -50,12 +50,18 @@ public class ArticleController {
     }
 
     @GetMapping("/article/show/")
-    public String toList() {
+    public String toList(Model model) {
+        List<String> tags = articleService.getTags();
+        List<String> categorys = articleService.getCategorys();
+
+        model.addAttribute("tags",tags);
+        model.addAttribute("categorys",categorys);
         return "/list";
     }
 
     @GetMapping("/article/List/tag/{tag}")
     public String toListByTag(@PathVariable String tag, Model model, HttpServletRequest request) {
+
 
         List<Article> list = articleService.pageByTag(tag);
         model.addAttribute("list", list);
@@ -65,7 +71,11 @@ public class ArticleController {
             List<Article> articleListByNewComment = articleService.pageByNewComment();
             request.getSession().setAttribute("articleListByNewComment", articleListByNewComment);
         }
+        List<String> tags = articleService.getTags();
+        List<String> categorys = articleService.getCategorys();
 
+        model.addAttribute("tags",tags);
+        model.addAttribute("categorys",categorys);
         return "/list";
     }
 
@@ -80,7 +90,11 @@ public class ArticleController {
             List<Article> articleListByNewComment = articleService.pageByNewComment();
             request.getSession().setAttribute("articleListByNewComment", articleListByNewComment);
         }
+        List<String> tags = articleService.getTags();
+        List<String> categorys = articleService.getCategorys();
 
+        model.addAttribute("tags",tags);
+        model.addAttribute("categorys",categorys);
         return "/list";
     }
 
