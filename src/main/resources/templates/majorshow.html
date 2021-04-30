@@ -27,6 +27,10 @@
     <!--[if lt IE 9]>
     <script>window.location.href = 'upgrade-browser.html';</script>
     <![endif]-->
+    <style>
+        table,table tr th, table tr td { border:3px solid #555555; }
+        table { width: 100%; height: 800px ; min-height: 25px; line-height: 25px; text-align: center; border-collapse: collapse;}
+    </style>
 </head>
 <body class="user-select single">
 <header class="header">
@@ -44,15 +48,15 @@
 		</span></div>
                 </form>
                 <ul class="nav navbar-nav navbar-left" th:if="${ session.user ==null }">
-                    <li><a data-cont="木庄网络博客" th:href="@{/login}" title="登录">登陆</a></li>
-                    <li><a data-cont="木庄网络博客" th:href="@{/regist}" title="注册">注册</a></li>
+                    <li><a data-cont="" th:href="@{/login}" title="登录">登陆</a></li>
+                    <li><a data-cont="" th:href="@{/regist}" title="注册">注册</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-left" th:if="${session.user !=null }">
-                    <li><a data-cont="木庄网络博客" th:text="${ session.user.getTrueName()}+',你好'" title="用户"></a></li>
-                    <li><a data-cont="木庄网络博客" th:href="@{/logout}" title="注销">注销</a></li>
+                    <li><a data-cont="" th:text="${ session.user.getTrueName()}+',你好'" title="用户"></a></li>
+                    <li><a data-cont="" th:href="@{/logout}" title="注销">注销</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a data-cont="木庄网络博客" th:href="@{/index.html}" title="首页">首页</a></li>
+                    <li><a data-cont="" th:href="@{/index.html}" title="首页">首页</a></li>
                     <li><a data-cont="列表页" th:href="@{/list.html}" title="列表页">资料列表</a></li>
                     <li><a data-cont="详细页" th:href="@{/schoollist.html}" title="详细页">学校详细页</a></li>
                     <li><a data-cont="详细页" th:href="@{/majorlist.html}" title="详细页">专业详细页</a></li>
@@ -69,19 +73,21 @@
                 <h1 class="article-title"><a href="#" th:text="专业分数排名"
                 ></a></h1>
             </header>
-
-            <article class="article-content">
-                <h2>
-                    <p th:each="major,index:${majors}">
-                        <span th:text="${index.index}"></span>
-                        &emsp;学校名称: <a th:href="@{'/school/show/'+${major.getSchoolId()}}"
-                                       th:text="${major.getSchoolName()}"></a>
-                        &emsp;学校分数:<span th:text="${major.getMajorScore()}"></span>
-                    </p>
-                </h2>
-
-
-            </article>
+        <h2>
+            <table>
+                <tr>
+                    <td >排名</td>
+                    <td >学校名称</td>
+                    <td >学校分数</td>
+                </tr>
+                <tr th:each="major,index:${majors}">
+                    <td  th:text="${index.index+1}"></td>
+                    <td ><a th:href="@{'/school/show/'+${major.getSchoolId()}}"
+                           th:text="${major.getSchoolName()}"></a></td>
+                    <td  th:text="${major.getMajorScore()}"></td>
+                </tr>
+            </table>
+        </h2>
 
         </div>
     </div>

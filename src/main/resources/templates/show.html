@@ -44,15 +44,15 @@
 		</span></div>
                 </form>
                 <ul class="nav navbar-nav navbar-left" th:if="${ session.user ==null }">
-                    <li><a data-cont="木庄网络博客" th:href="@{/login}" title="登录">登陆</a></li>
-                    <li><a data-cont="木庄网络博客" th:href="@{/regist}" title="注册">注册</a></li>
+                    <li><a data-cont="" th:href="@{/login}" title="登录">登陆</a></li>
+                    <li><a data-cont="" th:href="@{/regist}" title="注册">注册</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-left" th:if="${session.user !=null }">
-                    <li><a data-cont="木庄网络博客" th:text="${ session.user.getTrueName()}+',你好'" title="用户"></a></li>
-                    <li><a data-cont="木庄网络博客" th:href="@{/logout}" title="注销">注销</a></li>
+                    <li><a data-cont="" th:text="${ session.user.getTrueName()}+',你好'" title="用户"></a></li>
+                    <li><a data-cont="" th:href="@{/logout}" title="注销">注销</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a data-cont="木庄网络博客" th:href="@{/index.html}" title="首页">首页</a></li>
+                    <li><a data-cont="" th:href="@{/index.html}" title="首页">首页</a></li>
                     <li><a data-cont="列表页" th:href="@{/list.html}" title="列表页">资料列表</a></li>
                     <li><a data-cont="详细页" th:href="@{/schoollist.html}" title="详细页">学校详细页</a></li>
                     <li><a data-cont="详细页" th:href="@{/majorlist.html}" title="详细页">专业详细页</a></li>
@@ -72,7 +72,7 @@
 
 	  <time class="time" data-placement="bottom" data-toggle="tooltip"><i
               class="glyphicon glyphicon-time"></i><span th:text="${article.getPublishDate().toString()}"></span></time>
-	  </span> <span class="item article-meta-source"  data-placement="bottom"
+	  </span> <span class="item article-meta-source" data-placement="bottom"
                     data-toggle="tooltip"
                     title=""><i class="glyphicon glyphicon-globe"></i><span
                         th:text="${article.getArticleCategories()}"></span></span>
@@ -142,7 +142,8 @@
             <div id="postcomments">
                 <ol class="commentlist" id="comment_list">
                     <li class="comment-content" th:each="index:${commentRecordList}"
-                        th:if="${commentRecordList!=null || commentRecordList.size()!=0}"><span class="comment-f">-</span>
+                        th:if="${commentRecordList!=null || commentRecordList.size()!=0}"><span
+                            class="comment-f">-</span>
                         <div class="comment-main"><p><a class="address" rel="nofollow"
                                                         target="_blank" th:text="${index.getAnswererName()}"></a><span
                                 class="time" th:text="${index.getCommentDate()}"></span>

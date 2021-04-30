@@ -47,15 +47,15 @@
                 </form>
 
                 <ul class="nav navbar-nav navbar-left" th:if="${ session.user ==null }">
-                    <li><a data-cont="木庄网络博客" th:href="@{/login}" title="登录">登陆</a></li>
-                    <li><a data-cont="木庄网络博客" th:href="@{/regist}" title="注册">注册</a></li>
+                    <li><a data-cont="" th:href="@{/login}" title="登录">登陆</a></li>
+                    <li><a data-cont="" th:href="@{/regist}" title="注册">注册</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-left" th:if="${session.user !=null }">
-                    <li><a data-cont="木庄网络博客" th:text="${ session.user.getTrueName()}+',你好'" title="用户"></a></li>
-                    <li><a data-cont="木庄网络博客" th:href="@{/logout}" title="注销">注销</a></li>
+                    <li><a data-cont="" th:text="${ session.user.getTrueName()}+',你好'" title="用户"></a></li>
+                    <li><a data-cont="" th:href="@{/logout}" title="注销">注销</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a data-cont="木庄网络博客" th:href="@{/index.html}" title="首页">首页</a></li>
+                    <li><a data-cont="" th:href="@{/index.html}" title="首页">首页</a></li>
                     <li><a data-cont="列表页" th:href="@{/list.html}" title="列表页">资料列表</a></li>
                     <li><a data-cont="详细页" th:href="@{/schoollist.html}" title="详细页">学校详细页</a></li>
                     <li><a data-cont="详细页" th:href="@{/majorlist.html}" title="详细页">专业详细页</a></li>
@@ -92,11 +92,7 @@
                 <h3>最新发布</h3>
             </div>
 
-            <article class="excerpt excerpt-1" style="" th:each="index:${session.list}">
-                <a class="focus" target="_blank" th:href="@{'/article/show/'+${index.getId()}}">
-                    <img alt="用DTcms做一个独立博客网站（响应式模板）" class="thumb"
-                         data-original="/images/2017116245.jpg" style="display: inline;"
-                         th:src="@{/images/2017116245.jpg}"></a>
+            <article class="excerpt excerpt-minic-index" style="" th:each="index:${session.list}">
                 <header><a class="cat" th:href="@{'/article/show/'+${index.getId()}}">标题</a>
                     <h2><a target="_blank" th:href="@{'/article/show/'+${index.getId()}}"
                            th:text="${index.getArticleTitle()}"></a>
