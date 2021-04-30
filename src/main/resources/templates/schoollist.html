@@ -70,21 +70,23 @@
                 <h3 style="line-height: 1.3">学校排名</h3>
             </div>
             <article class="excerpt excerpt-1" style="" th:each="index:${list}">
-                <a class="focus" th:href="@{'/school/show/'+${index.getId()}}" target="_blank" >
-                    <img alt="用DTcms做一个独立博客网站（响应式模板）" class="thumb"
-                         data-original="/images/2017116245.jpg" style="display: inline;"
-                         th:src="@{/images/2017116245.jpg}"></a>
+                <a class="focus" target="_blank" th:href="@{'/school/show/'+${index.getId()}}">
+                    <img  class="thumb"
+                          style="display: inline;"
+                         th:src="@{'/images/'+${index.getPicture()}+'.jpg'}" /></a>
                 <header><a class="cat" th:href="@{'/school/show/'+${index.getId()}}">标题</a>
-                    <h2><a th:href="@{'/school/show/'+${index.getId()}}" target="_blank" th:text="${index.getName()}"></a>
+                    <h2><a target="_blank" th:href="@{'/school/show/'+${index.getId()}}"
+                           th:text="${index.getName()}"></a>
                     </h2>
                 </header>
                 <p class="meta">
                     <time class="time"><i class="glyphicon glyphicon-time"></i><span
                             th:text="${index.getUrl()}"></span></time>
-                    <span class="views"><i class="glyphicon glyphicon-eye-open"></i><span th:text="${index.getNature()}"></span></span> <a class="comment"
-                                                                                                                                          href="##comment"
-                                                                                                                                          target="_blank"
-                                                                                                                                          title="评论"><i
+                    <span class="views"><i class="glyphicon glyphicon-eye-open"></i><span
+                            th:text="${index.getNature()}"></span></span> <a class="comment"
+                                                                             href="##comment"
+                                                                             target="_blank"
+                                                                             title="评论"><i
                         class="glyphicon glyphicon-comment"></i> 4</a>
                 </p>
 
@@ -95,12 +97,14 @@
         <div class="widget widget_hot">
             <h3>最新评论文章</h3>
             <ul th:each="index:${session.articleListByNewComment}">
-                <li><a th:href="@{'/article/show/'+${index.getId()}}" ><span class="thumbnail">
+                <li><a th:href="@{'/article/show/'+${index.getId()}}"><span class="thumbnail">
 <img alt="" class="thumb" data-original="/images/2017116245.jpg"
      src="/images/2017116245.jpg" style="display: block;">
-</span><span class="text" th:text="${index.getArticleTitle()}"></span><span class="muted"><i class="glyphicon glyphicon-time"></i>
+</span><span class="text" th:text="${index.getArticleTitle()}"></span><span class="muted"><i
+                        class="glyphicon glyphicon-time"></i>
 <span th:text="${index.getPublishDate()}"></span>
-</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i><span th:text="${index.getLikes()}"></span></span></a></li>
+</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i><span
+                        th:text="${index.getLikes()}"></span></span></a></li>
             </ul>
         </div>
         <div class="widget widget_sentence">

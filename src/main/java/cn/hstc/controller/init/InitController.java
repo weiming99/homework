@@ -27,7 +27,7 @@ public class InitController {
             request.getSession().setAttribute("list", articleService.page());
         }
         List<Article> listByNewComment = (List<Article>) request.getSession().getAttribute("articleListByNewComment");
-        if (listByNewComment == null || listByNewComment.size()==0){
+        if (listByNewComment == null || listByNewComment.size() == 0) {
             List<Article> articleListByNewComment = articleService.pageByNewComment();
             request.getSession().setAttribute("articleListByNewComment", articleListByNewComment);
         }
@@ -36,21 +36,21 @@ public class InitController {
     }
 
     @GetMapping({"/show", "/show.html"})
-    public String toShow(Model model,HttpServletRequest request) {
+    public String toShow(Model model, HttpServletRequest request) {
         Object list1 = model.getAttribute("list");
         Object article = model.getAttribute("article");
-        if(list1==null || article ==null){
+        if (list1 == null || article == null) {
             List<Article> list = articleService.page();
             model.addAttribute("list", list);
             List<String> tags = articleService.getTags();
             List<String> categorys = articleService.getCategorys();
 
-            model.addAttribute("tags",tags);
-            model.addAttribute("categorys",categorys);
+            model.addAttribute("tags", tags);
+            model.addAttribute("categorys", categorys);
             return "/list";
         }
         List<Article> listByNewComment = (List<Article>) request.getSession().getAttribute("articleListByNewComment");
-        if (listByNewComment == null || listByNewComment.size()==0){
+        if (listByNewComment == null || listByNewComment.size() == 0) {
             List<Article> articleListByNewComment = articleService.pageByNewComment();
             request.getSession().setAttribute("articleListByNewComment", articleListByNewComment);
         }
@@ -59,21 +59,21 @@ public class InitController {
     }
 
     @GetMapping({"/list", "/list.html"})
-    public String toList(Model model,HttpServletRequest request) {
+    public String toList(Model model, HttpServletRequest request) {
         List<Article> list1 = (List<Article>) model.getAttribute("list");
         if (list1 == null || list1.size() == 0) {
             model.addAttribute("list", articleService.page());
         }
         List<Article> listByNewComment = (List<Article>) request.getSession().getAttribute("articleListByNewComment");
-        if (listByNewComment == null || listByNewComment.size()==0){
+        if (listByNewComment == null || listByNewComment.size() == 0) {
             List<Article> articleListByNewComment = articleService.pageByNewComment();
             request.getSession().setAttribute("articleListByNewComment", articleListByNewComment);
         }
         List<String> tags = articleService.getTags();
         List<String> categorys = articleService.getCategorys();
 
-        model.addAttribute("tags",tags);
-        model.addAttribute("categorys",categorys);
+        model.addAttribute("tags", tags);
+        model.addAttribute("categorys", categorys);
 
         return "/list";
     }

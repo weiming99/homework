@@ -26,8 +26,8 @@ public class CommentRecordService {
 
 
     public List<CommentRecord> pageByArticleId(Integer articleId) {
-        IPage<CommentRecord>  commentRecordIPage= new Page<>(1, 5);
-        return commentRecordMapper.findListByArticleId(articleId,commentRecordIPage);
+        IPage<CommentRecord> commentRecordIPage = new Page<>(1, 5);
+        return commentRecordMapper.findListByArticleId(articleId, commentRecordIPage);
 
     }
 

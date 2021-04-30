@@ -67,7 +67,7 @@
         <div class="content">
             <header class="article-header">
                 <h1 class="article-title"><a href="#" th:text="${school.getName()}"
-                                             ></a></h1>
+                ></a></h1>
                 <div class="article-meta"> <span class="item article-meta-time">
 
 	  <time class="time" data-placement="bottom" data-toggle="tooltip"><i
@@ -142,15 +142,17 @@
                 </form>
             </div>
         </div>
-        <div class="widget widget_hot" >
+        <div class="widget widget_hot">
             <h3>最新评论文章</h3>
             <ul th:each="index:${session.articleListByNewComment}">
-                <li><a th:href="@{'/article/show/'+${index.getId()}}" ><span class="thumbnail">
+                <li><a th:href="@{'/article/show/'+${index.getId()}}"><span class="thumbnail">
 <img alt="" class="thumb" data-original="/images/2017116245.jpg"
      src="/images/2017116245.jpg" style="display: block;">
-</span><span class="text" th:text="${index.getArticleTitle()}"></span><span class="muted"><i class="glyphicon glyphicon-time"></i>
+</span><span class="text" th:text="${index.getArticleTitle()}"></span><span class="muted"><i
+                        class="glyphicon glyphicon-time"></i>
 <span th:text="${index.getPublishDate()}"></span>
-</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i><span th:text="${index.getLikes()}"></span></span></a></li>
+</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i><span
+                        th:text="${index.getLikes()}"></span></span></a></li>
             </ul>
         </div>
 

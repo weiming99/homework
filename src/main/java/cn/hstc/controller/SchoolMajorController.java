@@ -30,15 +30,15 @@ public class SchoolMajorController {
     private SchoolMajorService schoolMajorService;
 
 
-    @GetMapping({"/majorlist.html","/majorlist"})
-    public String get(Model model,HttpServletRequest request) {
+    @GetMapping({"/majorlist.html", "/majorlist"})
+    public String get(Model model, HttpServletRequest request) {
         List<Article> listByNewComment = (List<Article>) request.getSession().getAttribute("articleListByNewComment");
-        if (listByNewComment == null || listByNewComment.size()==0){
+        if (listByNewComment == null || listByNewComment.size() == 0) {
             List<Article> articleListByNewComment = articleService.pageByNewComment();
             request.getSession().setAttribute("articleListByNewComment", articleListByNewComment);
         }
 
-        model.addAttribute("list",schoolMajorService.getList());
+        model.addAttribute("list", schoolMajorService.getList());
 
         return "/majorlist";
     }
@@ -46,12 +46,12 @@ public class SchoolMajorController {
     @GetMapping("/major/show/{id}")
     public String get(@PathVariable String id, Model model, HttpServletRequest request) {
         List<Article> listByNewComment = (List<Article>) request.getSession().getAttribute("articleListByNewComment");
-        if (listByNewComment == null || listByNewComment.size()==0){
+        if (listByNewComment == null || listByNewComment.size() == 0) {
             List<Article> articleListByNewComment = articleService.pageByNewComment();
             request.getSession().setAttribute("articleListByNewComment", articleListByNewComment);
         }
 
-       model.addAttribute("majors",schoolMajorService.get(id));
+        model.addAttribute("majors", schoolMajorService.get(id));
 
         return "/majorshow";
     }

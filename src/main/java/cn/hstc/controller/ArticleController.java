@@ -34,14 +34,14 @@ public class ArticleController {
             return "/404";
         }
         List<Article> list = articleService.page();
-        List<CommentRecord> commentRecordList =commentRecordService.pageByArticleId(article.getId());
+        List<CommentRecord> commentRecordList = commentRecordService.pageByArticleId(article.getId());
 
         model.addAttribute("article", article);
         model.addAttribute("list", list);
         model.addAttribute("commentRecordList", commentRecordList);
 
         List<Article> listByNewComment = (List<Article>) request.getSession().getAttribute("articleListByNewComment");
-        if (listByNewComment == null || listByNewComment.size()==0){
+        if (listByNewComment == null || listByNewComment.size() == 0) {
             List<Article> articleListByNewComment = articleService.pageByNewComment();
             request.getSession().setAttribute("articleListByNewComment", articleListByNewComment);
         }
@@ -54,8 +54,8 @@ public class ArticleController {
         List<String> tags = articleService.getTags();
         List<String> categorys = articleService.getCategorys();
 
-        model.addAttribute("tags",tags);
-        model.addAttribute("categorys",categorys);
+        model.addAttribute("tags", tags);
+        model.addAttribute("categorys", categorys);
         return "/list";
     }
 
@@ -67,15 +67,15 @@ public class ArticleController {
         model.addAttribute("list", list);
 
         List<Article> listByNewComment = (List<Article>) request.getSession().getAttribute("articleListByNewComment");
-        if (listByNewComment == null || listByNewComment.size()==0){
+        if (listByNewComment == null || listByNewComment.size() == 0) {
             List<Article> articleListByNewComment = articleService.pageByNewComment();
             request.getSession().setAttribute("articleListByNewComment", articleListByNewComment);
         }
         List<String> tags = articleService.getTags();
         List<String> categorys = articleService.getCategorys();
 
-        model.addAttribute("tags",tags);
-        model.addAttribute("categorys",categorys);
+        model.addAttribute("tags", tags);
+        model.addAttribute("categorys", categorys);
         return "/list";
     }
 
@@ -86,15 +86,15 @@ public class ArticleController {
         model.addAttribute("list", list);
 
         List<Article> listByNewComment = (List<Article>) request.getSession().getAttribute("articleListByNewComment");
-        if (listByNewComment == null || listByNewComment.size()==0){
+        if (listByNewComment == null || listByNewComment.size() == 0) {
             List<Article> articleListByNewComment = articleService.pageByNewComment();
             request.getSession().setAttribute("articleListByNewComment", articleListByNewComment);
         }
         List<String> tags = articleService.getTags();
         List<String> categorys = articleService.getCategorys();
 
-        model.addAttribute("tags",tags);
-        model.addAttribute("categorys",categorys);
+        model.addAttribute("tags", tags);
+        model.addAttribute("categorys", categorys);
         return "/list";
     }
 

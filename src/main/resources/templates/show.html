@@ -67,12 +67,12 @@
         <div class="content">
             <header class="article-header">
                 <h1 class="article-title"><a href="#" th:text="${article.getArticleTitle()}"
-                                             th:title="${article.getArticleTitle()}">用DTcms做一个独立博客网站（响应式模板）</a></h1>
+                                             th:title="${article.getArticleTitle()}"></a></h1>
                 <div class="article-meta"> <span class="item article-meta-time">
 
 	  <time class="time" data-placement="bottom" data-toggle="tooltip"><i
               class="glyphicon glyphicon-time"></i><span th:text="${article.getPublishDate().toString()}"></span></time>
-	  </span> <span class="item article-meta-source" data-original-title="来源：木庄网络博客" data-placement="bottom"
+	  </span> <span class="item article-meta-source"  data-placement="bottom"
                     data-toggle="tooltip"
                     title=""><i class="glyphicon glyphicon-globe"></i><span
                         th:text="${article.getArticleCategories()}"></span></span>
@@ -105,7 +105,8 @@
                     <h3>相关推荐</h3>
                 </div>
                 <ul>
-                    <li th:each="index:${list}"><a th:href="@{'/article/show/'+${index.getId()}}"  th:text="${index.getArticleTitle()}"></a></li>
+                    <li th:each="index:${list}"><a th:href="@{'/article/show/'+${index.getId()}}"
+                                                   th:text="${index.getArticleTitle()}"></a></li>
 
                 </ul>
             </div>
@@ -115,12 +116,12 @@
             <div id="respond">
                 <form action="" id="comment-form" method="POST" name="comment-form">
                     <div class="comment">
-<!--                        <input autocomplete="off" class="form-control" id="1" maxlength="15" name=""-->
-<!--                               placeholder="您的昵称（必填）"-->
-<!--                               size="22" tabindex="1" type="text">-->
-<!--                        <input autocomplete="off" class="form-control" id="2" maxlength="58" name=""-->
-<!--                               placeholder="您的网址或邮箱（非必填）"-->
-<!--                               size="22" tabindex="2" type="text">-->
+                        <!--                        <input autocomplete="off" class="form-control" id="1" maxlength="15" name=""-->
+                        <!--                               placeholder="您的昵称（必填）"-->
+                        <!--                               size="22" tabindex="1" type="text">-->
+                        <!--                        <input autocomplete="off" class="form-control" id="2" maxlength="58" name=""-->
+                        <!--                               placeholder="您的网址或邮箱（非必填）"-->
+                        <!--                               size="22" tabindex="2" type="text">-->
                         <div class="comment-box">
                             <textarea cols="100%" id="comment-textarea" name="comment-textarea"
                                       placeholder="您的评论或留言（必填）" rows="3" tabindex="3"></textarea>
@@ -140,9 +141,11 @@
 
             <div id="postcomments">
                 <ol class="commentlist" id="comment_list">
-                    <li class="comment-content" th:if="${commentRecordList!=null || commentRecordList.size()!=0}" th:each="index:${commentRecordList}"><span class="comment-f">-</span>
-                        <div class="comment-main"><p><a class="address"  rel="nofollow"
-                                                        target="_blank" th:text="${index.getAnswererName()}"></a><span class="time" th:text="${index.getCommentDate()}"></span>
+                    <li class="comment-content" th:each="index:${commentRecordList}"
+                        th:if="${commentRecordList!=null || commentRecordList.size()!=0}"><span class="comment-f">-</span>
+                        <div class="comment-main"><p><a class="address" rel="nofollow"
+                                                        target="_blank" th:text="${index.getAnswererName()}"></a><span
+                                class="time" th:text="${index.getCommentDate()}"></span>
                             <br><span th:utext="${index.getCommentContent()}"></span>
                         </p></div>
                     </li>
@@ -190,15 +193,17 @@
                 </form>
             </div>
         </div>
-        <div class="widget widget_hot" >
+        <div class="widget widget_hot">
             <h3>最新评论文章</h3>
             <ul th:each="index:${session.articleListByNewComment}">
-                <li><a th:href="@{'/article/show/'+${index.getId()}}" ><span class="thumbnail">
+                <li><a th:href="@{'/article/show/'+${index.getId()}}"><span class="thumbnail">
 <img alt="" class="thumb" data-original="/images/2017116245.jpg"
      src="/images/2017116245.jpg" style="display: block;">
-</span><span class="text" th:text="${index.getArticleTitle()}"></span><span class="muted"><i class="glyphicon glyphicon-time"></i>
+</span><span class="text" th:text="${index.getArticleTitle()}"></span><span class="muted"><i
+                        class="glyphicon glyphicon-time"></i>
 <span th:text="${index.getPublishDate()}"></span>
-</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i><span th:text="${index.getLikes()}"></span></span></a></li>
+</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i><span
+                        th:text="${index.getLikes()}"></span></span></a></li>
             </ul>
         </div>
 

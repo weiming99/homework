@@ -37,12 +37,12 @@ public class ArticleService {
 
     public List<Article> pageByTag(String tag) {
         IPage<Article> articleIPage = new Page<>(1, 5);
-        return articleMapper.findListByTag(tag,articleIPage);
+        return articleMapper.findListByTag(tag, articleIPage);
     }
 
     public List<Article> pageByCategory(String category) {
         IPage<Article> articleIPage = new Page<>(1, 5);
-        return articleMapper.findListByCategory(category,articleIPage);
+        return articleMapper.findListByCategory(category, articleIPage);
     }
 
     public List<String> getTags() {

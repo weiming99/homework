@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class School {
 
-    @TableId(value = "id",type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     @TableField()
@@ -45,4 +45,7 @@ public class School {
 
     @TableField()
     private String introduction;
+
+    @TableField()
+    private String picture;
 }

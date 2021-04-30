@@ -64,21 +64,21 @@
 </header>
 <section class="container">
     <div class="content-wrap">
-        <div class="content" >
+        <div class="content">
             <header class="article-header">
                 <h1 class="article-title"><a href="#" th:text="专业分数排名"
-                                             ></a></h1>
+                ></a></h1>
             </header>
 
             <article class="article-content">
-                <h2 >
+                <h2>
                     <p th:each="major,index:${majors}">
                         <span th:text="${index.index}"></span>
-                        &emsp;学校名称: <a th:href="@{'/school/show/'+${major.getSchoolId()}}" th:text="${major.getSchoolName()}"></a>
+                        &emsp;学校名称: <a th:href="@{'/school/show/'+${major.getSchoolId()}}"
+                                       th:text="${major.getSchoolName()}"></a>
                         &emsp;学校分数:<span th:text="${major.getMajorScore()}"></span>
                     </p>
                 </h2>
-
 
 
             </article>
@@ -125,15 +125,17 @@
                 </form>
             </div>
         </div>
-        <div class="widget widget_hot" >
+        <div class="widget widget_hot">
             <h3>最新评论文章</h3>
             <ul th:each="index:${session.articleListByNewComment}">
-                <li><a th:href="@{'/article/show/'+${index.getId()}}" ><span class="thumbnail">
+                <li><a th:href="@{'/article/show/'+${index.getId()}}"><span class="thumbnail">
 <img alt="" class="thumb" data-original="/images/2017116245.jpg"
      src="/images/2017116245.jpg" style="display: block;">
-</span><span class="text" th:text="${index.getArticleTitle()}"></span><span class="muted"><i class="glyphicon glyphicon-time"></i>
+</span><span class="text" th:text="${index.getArticleTitle()}"></span><span class="muted"><i
+                        class="glyphicon glyphicon-time"></i>
 <span th:text="${index.getPublishDate()}"></span>
-</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i><span th:text="${index.getLikes()}"></span></span></a></li>
+</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i><span
+                        th:text="${index.getLikes()}"></span></span></a></li>
             </ul>
         </div>
 
